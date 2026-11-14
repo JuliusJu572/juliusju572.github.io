@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruibin Ju · Perception & Aerial Robotics</title>
+  <meta name="description" content="Ruibin Ju is a perception algorithm engineer at ARIDGE, working on aerial vision-language navigation and real-time perception.">
+  <meta property="og:title" content="Ruibin Ju · Perception & Aerial Robotics">
+  <meta property="og:description" content="Projects in aerial navigation, semantic mapping, and perception engineering.">
+  <link rel="canonical" href="https://juliusju572.github.io/">
+  <link rel="icon" href="assets/ruibin-ju.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header shell">
+    <a class="wordmark" href="./">Ruibin Ju</a>
+    <nav aria-label="Main navigation">
+      <a href="#work">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <main id="main" class="shell">
+    <section class="intro" aria-labelledby="name">
+      <div>
+        <p class="eyebrow">Perception engineer · Shanghai</p>
+        <h1 id="name">Ruibin Ju <span lang="zh-CN">琚锐彬</span></h1>
+        <p class="intro-text">I work on aerial vision-language navigation, real-time semantic mapping, and perception for landing at <strong>ARIDGE (XPENG)</strong>.</p>
+        <div class="links">
+          <a class="button primary" href="#work">Explore projects <span aria-hidden="true">↓</span></a>
+          <a class="button" href="https://github.com/JuliusJu572">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <img src="assets/ruibin-ju.jpg" width="600" height="840" alt="Portrait of Ruibin Ju" fetchpriority="high">
+      </figure>
+    </section>
+
+    <section id="work" class="section" aria-labelledby="work-title">
+      <h2 id="work-title">Selected projects</h2>
+      <article class="featured">
+        <div class="featured-content">
+          <p class="eyebrow">Aerial vision-language navigation · First author</p>
+          <h3>X-Fly</h3>
+          <p>Learning to reach and stop in full-chunk aerial navigation. The policy generates eight controls per decision, then learns to recover from drift and stop at the right moment with Recovery DAgger and Flow-GRPO.</p>
+          <dl class="metrics">
+            <div><dt>Seen success</dt><dd>74.18%</dd></div>
+            <div><dt>Unseen success</dt><dd>51.73%</dd></div>
+            <div><dt>Inference per waypoint</dt><dd>42 ms</dd></div>
+          </dl>
+          <div class="links">
+            <a class="button primary" href="https://juliusju572.github.io/x-fly/">Project &amp; demos <span aria-hidden="true">↗</span></a>
+            <a class="button" href="https://arxiv.org/abs/2610.21450v2">Read preprint <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <figure class="rollout">
+          <img src="assets/x-fly-skyline.jpg" width="992" height="261" alt="X-Fly urban navigation example showing the expert and predicted aerial views and their paths on a bird’s-eye-view plot" loading="lazy">
+          <figcaption>OpenFly rollout with the expert and predicted trajectories.</figcaption>
+        </figure>
+      </article>
+      <div class="project-grid">
+        <article>
+          <p class="eyebrow">Semantic mapping &amp; planning</p>
+          <h3>Real-time 3D BEV</h3>
+          <p>Fuse onboard views into a semantic map with terrain and obstacle heights. Translate natural-language flight instructions into constraints for cost-aware A* planning and flight control.</p>
+        </article>
+        <article>
+          <p class="eyebrow">Detection &amp; quantization</p>
+          <h3>Landing marker perception</h3>
+          <p>Improve YOLO detection on difficult landing-marker examples and evaluate quantization-aware training for onboard deployment.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="section history" aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience &amp; education</h2>
+      <ul class="timeline">
+        <li><div><strong>ARIDGE (XPENG)</strong><span>Perception Algorithm Engineer</span></div><time datetime="2026-07">Jul 2026 – Present</time></li>
+        <li><div><strong>Shanghai University</strong><span>M.S., Management Science and Engineering</span></div><time datetime="2026-06">2023 – 2026</time></li>
+        <li><div><strong>University of Shanghai for Science and Technology</strong><span>Bachelor’s, Information Management and Information Systems</span></div><time datetime="2023-06">2019 – 2023</time></li>
+      </ul>
+      <p class="prior">Previously interned at 51WORLD, Qianli Intelligent Driving, and the Shanghai Airport AI Lab, working on scene understanding, driving data mining, and computer vision.</p>
+    </section>
+
+    <section id="contact" class="section contact" aria-labelledby="contact-title">
+      <div><h2 id="contact-title">Get in touch</h2><p>Research and engineering inquiries</p></div>
+      <a class="button primary" href="mailto:jrb572572@163.com">Email Ruibin <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+  <footer class="shell footer"><span>Ruibin Ju <span lang="zh-CN">琚锐彬</span></span><a href="https://github.com/JuliusJu572">GitHub <span aria-hidden="true">↗</span></a></footer>
+</body>
+</html>
