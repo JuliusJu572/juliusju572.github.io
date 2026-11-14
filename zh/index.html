@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>琚锐彬 · 感知算法与空中机器人</title>
+  <meta name="description" content="琚锐彬是小鹏汇天的感知算法工程师，主要从事空中视觉语言导航、实时语义建图和降落感知。">
+  <meta property="og:title" content="琚锐彬 · 感知算法与空中机器人">
+  <meta property="og:description" content="空中导航、实时语义建图与感知工程项目。">
+  <link rel="canonical" href="https://juliusju572.github.io/zh/">
+  <link rel="alternate" hreflang="en" href="https://juliusju572.github.io/">
+  <link rel="alternate" hreflang="zh-CN" href="https://juliusju572.github.io/zh/">
+  <link rel="alternate" hreflang="x-default" href="https://juliusju572.github.io/">
+  <link rel="icon" href="../assets/ruibin-ju.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header shell">
+    <a class="wordmark" href="./">琚锐彬</a>
+    <div class="header-controls">
+      <nav class="main-nav" aria-label="主导航">
+        <a href="#work">项目</a>
+        <a href="#experience">经历</a>
+        <a href="#contact">联系</a>
+      </nav>
+      <nav class="language-nav" aria-label="语言">
+        <a href="../" lang="en" hreflang="en">EN</a>
+        <a href="./" lang="zh-CN" aria-current="page">中文</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="shell">
+    <section class="intro" aria-labelledby="name">
+      <div>
+        <p class="eyebrow">感知算法工程师 · 上海</p>
+        <h1 id="name">琚锐彬 <span lang="en">Ruibin Ju</span></h1>
+        <p class="intro-text">我在<strong>小鹏汇天（小鹏集团）</strong>从事空中视觉语言导航、实时语义建图及降落感知。</p>
+        <div class="links">
+          <a class="button primary" href="#work">查看项目 <span aria-hidden="true">↓</span></a>
+          <a class="button" href="https://github.com/JuliusJu572">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <img src="../assets/ruibin-ju.jpg" width="600" height="840" alt="琚锐彬的证件照" fetchpriority="high">
+      </figure>
+    </section>
+
+    <section id="work" class="section" aria-labelledby="work-title">
+      <h2 id="work-title">代表项目</h2>
+      <article class="featured">
+        <div class="featured-content">
+          <p class="eyebrow">空中视觉语言导航 · 第一作者</p>
+          <h3>X-Fly</h3>
+          <p>在空中视觉语言导航中，每次决策生成并执行 8 步连续控制。用 Recovery DAgger 学习偏航后回轨与到点停止，再用 Flow-GRPO 基于闭环结果联合优化控制与停止时机。</p>
+          <dl class="metrics">
+            <div><dt>已见场景成功率</dt><dd>74.18%</dd></div>
+            <div><dt>未见场景成功率</dt><dd>51.73%</dd></div>
+            <div><dt>单航点摊销推理耗时</dt><dd>42 ms</dd></div>
+          </dl>
+          <div class="links">
+            <a class="button primary" href="https://juliusju572.github.io/x-fly/zh/">项目与演示 <span aria-hidden="true">↗</span></a>
+            <a class="button" href="https://arxiv.org/abs/2610.21450v2">阅读预印本 <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <figure class="rollout">
+          <img src="../assets/x-fly-skyline.jpg" width="992" height="261" alt="X-Fly 城市飞行示例，包含专家与预测视角及其俯视飞行轨迹" loading="lazy">
+          <figcaption>OpenFly 仿真案例中的专家与预测轨迹。</figcaption>
+        </figure>
+      </article>
+      <div class="project-grid">
+        <article>
+          <p class="eyebrow">语义建图与航线规划</p>
+          <h3>实时 3D BEV</h3>
+          <p>融合机载多视角图像，构建记录地面高程和障碍顶高的实时语义地图。将自然语言飞行指令转为约束和代价，供 A* 规划和飞行控制使用。</p>
+        </article>
+        <article>
+          <p class="eyebrow">目标检测与量化</p>
+          <h3>降落标志感知</h3>
+          <p>优化 YOLO 对降落标志难例的检测，并评估量化感知训练方案以支持机载部署。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="section history" aria-labelledby="experience-title">
+      <h2 id="experience-title">工作与教育经历</h2>
+      <ul class="timeline">
+        <li><div><strong>小鹏汇天（小鹏集团）</strong><span>感知算法工程师</span></div><time datetime="2026-07">2026.07 至今</time></li>
+        <li><div><strong>上海大学</strong><span>管理科学与工程 · 硕士</span></div><time datetime="2026-06">2023 – 2026</time></li>
+        <li><div><strong>上海理工大学</strong><span>信息管理与信息系统 · 本科</span></div><time datetime="2023-06">2019 – 2023</time></li>
+      </ul>
+      <p class="prior">曾在 51WORLD、千里智驾和上海机场人工智能实验室实习，参与场景理解、自动驾驶数据挖掘与计算机视觉项目。</p>
+    </section>
+
+    <section id="contact" class="section contact" aria-labelledby="contact-title">
+      <div><h2 id="contact-title">联系我</h2><p>科研与工程交流</p></div>
+      <a class="button primary" href="mailto:jrb572572@163.com">发送邮件 <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+  <footer class="shell footer"><span>琚锐彬 <span lang="en">Ruibin Ju</span></span><a href="https://github.com/JuliusJu572">GitHub <span aria-hidden="true">↗</span></a></footer>
+</body>
+</html>
