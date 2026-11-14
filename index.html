@@ -49,50 +49,104 @@
       </figure>
     </section>
 
+
     <section id="work" class="section" aria-labelledby="work-title">
-      <h2 id="work-title">Selected projects</h2>
-      <article class="featured">
+      <div class="section-heading"><h2 id="work-title">ARIDGE (XPENG)</h2><p>Perception Algorithm Engineer · Jul 2026 – Present</p></div>
+      <nav class="project-index" aria-label="Project index"><a href="#xfly">X-Fly</a><a href="#bev">Real-time 3D BEV</a><a href="#landing">Landing markers</a><a href="#internships">Internships</a><a href="#research">Research</a><a href="#education">Education</a></nav>
+      <article id="xfly" class="featured">
         <div class="featured-content">
-          <p class="eyebrow">Aerial vision-language navigation · First author</p>
-          <h3>X-Fly</h3>
-          <p>Learning to reach and stop in full-chunk aerial navigation. The policy generates eight controls per decision, then learns to recover from drift and stop at the right moment with Recovery DAgger and Flow-GRPO.</p>
-          <dl class="metrics">
-            <div><dt>Seen success</dt><dd>74.18%</dd></div>
-            <div><dt>Unseen success</dt><dd>51.73%</dd></div>
-            <div><dt>Inference per waypoint</dt><dd>42 ms</dd></div>
-          </dl>
+          <p class="eyebrow">Aerial vision-language navigation · First author · Submitted to CVPR 2027</p><h3>X-Fly</h3><p>Executing an entire action chunk amortizes inference across multiple controls, but shifts the policy to states that expert demonstrations rarely cover. X-Fly learns both to recover from drift and to stop on arrival.</p>
+          <dl class="metrics"><div><dt>Seen success</dt><dd>74.18%</dd></div><div><dt>Unseen success</dt><dd>51.73%</dd></div><div><dt>Amortized inference per waypoint</dt><dd>42 ms</dd></div></dl>
           <div class="links">
             <a class="button primary" href="https://juliusju572.github.io/x-fly/">Project &amp; demos <span aria-hidden="true">↗</span></a>
             <a class="button" href="https://arxiv.org/abs/2610.21450v2">Read preprint <span aria-hidden="true">↗</span></a>
           </div>
         </div>
         <figure class="rollout">
-          <img src="assets/x-fly-skyline.jpg" width="992" height="261" alt="X-Fly urban navigation example showing the expert and predicted aerial views and their paths on a bird’s-eye-view plot" loading="lazy">
-          <figcaption>OpenFly rollout with the expert and predicted trajectories.</figcaption>
+          <img src="assets/x-fly-skyline.jpg" width="992" height="261" alt="Expert and predicted camera views and bird’s-eye-view paths from an X-Fly simulation" loading="lazy">
+          <figcaption>Expert and predicted routes in an OpenFly simulation.</figcaption>
         </figure>
+        <div class="project-body"><p>A frozen Qwen3.5-4B runs a slow path over the instruction and historical keyframes. The fast path encodes the current frame. A DiT generates eight continuous controls and a separate STOP head decides when to end the episode.</p>
+          <p>Multi-domain behavior cloning initializes the policy. Recovery DAgger supervises smooth return-to-route actions at learner-visited states and supplies a STOP label on first entering the goal region. Flow-GRPO jointly optimizes the controls and STOP decisions from closed-loop rollouts.</p>
+          <p>On OpenFly, the eight-control policy raises seen / unseen success from 16.45% / 18.43% for behavior cloning to 74.18% / 51.73%. The amortized inference cost drops from 195 to 42 ms per executed waypoint relative to single-step inference. On the seen split, recovery reduces reached-but-never-stopped failures from 47.78% to 0%, and Flow-GRPO lowers early stops from 21.21% to 9.34%.</p></div>
       </article>
-      <div class="project-grid">
-        <article>
-          <p class="eyebrow">Semantic mapping &amp; planning</p>
-          <h3>Real-time 3D BEV</h3>
-          <p>Fuse onboard views into a semantic map with terrain and obstacle heights. Translate natural-language flight instructions into constraints for cost-aware A* planning and flight control.</p>
-        </article>
-        <article>
-          <p class="eyebrow">Detection &amp; quantization</p>
-          <h3>Landing marker perception</h3>
-          <p>Improve YOLO detection on difficult landing-marker examples and evaluate quantization-aware training for onboard deployment.</p>
-        </article>
-      </div>
+      <article id="bev" class="featured featured-bev">
+        <div class="featured-content">
+          <p class="eyebrow">Online mapping · Constrained planning · Flight control</p><h3>Semantic and depth-enhanced 3D BEV</h3><p>Build a live, height-aware map from onboard cameras, then turn language instructions into constraints for route search and flight control.</p>
+        </div>
+        <figure class="rollout demo">
+          <video controls playsinline preload="none" poster="assets/bev-demo-poster.jpg" width="1600" height="900" aria-label="Play the BEV simulation video">
+            <source src="assets/bev-demo.mp4" type="video/mp4">
+            <a href="assets/bev-demo.mp4">Open video directly</a>
+          </video>
+          <figcaption>Original recording of a UE + FCU simulation. Front and downward cameras are on the left, the live BEV map in the center, and the route overview on the right. <a href="assets/bev-demo.mp4">Open video directly ↗</a></figcaption>
+        </figure>
+        <div class="project-body"><figure class="pipeline"><figcaption>Schematic · From camera observations and instructions to flight control</figcaption><ol><li><strong>Cameras and FCU pose</strong><span>Front and downward views over time</span></li>
+          <li><strong>Live 3D BEV map</strong><span>Semantics, visibility and heights</span></li>
+          <li><strong>Constrained A* search</strong><span>Grounded instructions and route costs</span></li>
+          <li><strong>3D route and tracking</strong><span>Altitude profile, smoothing and FCU</span></li></ol></figure><p>I built a data pipeline that plans expert routes with A*, renders the flights, and uses a VLM to generate instructions from the observations. At execution time, the VLM grounds landmarks and maps destination, avoidance, route preferences, speed and altitude requirements onto semantic map regions.</p>
+          <p>I fine-tuned the Qwen3.5 visual encoder with LoRA under 26-class semantic segmentation and metric depth supervision. The adapted backbone is shared by the VLM and BEV modules. On the cruise-flight data, depth accuracy (δ &lt; 1.25) rises from 71.99% to 88.61%, AbsRel falls from 0.1739 to 0.1137, and segmentation mIoU rises from 28.61% to 30.81%. A frozen-backbone probe reaches 88.68% depth accuracy.</p>
+          <p>Front- and downward-looking frames and flight-controller poses are projected at multiple heights. The system fuses visibility, semantic probabilities, terrain elevation and obstacle-top height into a 5 m world-aligned grid at 1 Hz. During training, ray intersections with a digital surface model and semantic grid generate supervision for observed cells.</p>
+          <p>The planner turns obstacles above the flight altitude and restricted regions into hard constraints, and preferences such as following a road into soft costs. A* finds a minimum-cost horizontal route on the height-aware map. Altitude profiling, circular-arc smoothing and jerk-limited S-curves produce a 3D reference trajectory for tracking. The system reaches 72% closed-loop task success in UE + FCU simulation.</p></div>
+      </article>
+      <div id="landing" class="experience-group standalone"><article class="case-study"><h3>Landing marker detection and quantization</h3><p>Improve robustness on hard landing-marker examples and choose a model that the target accelerator can run.</p>
+          <p><strong>Approach</strong> Added targeted training cases to reduce overfitting to circular outlines. Benchmarked three quantization-aware training configurations by target size and distance from the image center.</p>
+          <p><strong>Outcome</strong> Selected W10A10 for XPU compatibility. On 2,789 validation images it achieved 98.46% precision and 99.24% recall at confidence 0.6, with 86.35% mAP50–95. W16A16 reached 87.01% mAP50–95 as a comparison.</p></article></div>
     </section>
 
     <section id="experience" class="section history" aria-labelledby="experience-title">
-      <h2 id="experience-title">Experience &amp; education</h2>
-      <ul class="timeline">
-        <li><div><strong>ARIDGE (XPENG)</strong><span>Perception Algorithm Engineer</span></div><time datetime="2026-07">Jul 2026 – Present</time></li>
-        <li><div><strong>Shanghai University</strong><span>M.S., Management Science and Engineering</span></div><time datetime="2026-06">2023 – 2026</time></li>
-        <li><div><strong>University of Shanghai for Science and Technology</strong><span>Bachelor’s, Information Management and Information Systems</span></div><time datetime="2023-06">2019 – 2023</time></li>
-      </ul>
-      <p class="prior">Previously interned at 51WORLD, Qianli Intelligent Driving, and the Shanghai Airport AI Lab, working on scene understanding, driving data mining, and computer vision.</p>
+      <h2 id="experience-title">Internships</h2>
+      <div id="internships" class="experience-list"><article class="experience-group"><header><div><h3>51WORLD</h3><p>Algorithm Intern · SimOne 4.x / World Models</p></div><span class="date">Feb – May 2026</span></header><div class="case-grid"><article class="case-study"><h4>Long-video anomaly detection</h4>
+          <p>Detect and localize rare events in monocular driving videos.</p>
+          <p><strong>Approach</strong> Built a hierarchical LangGraph multi-agent router. Complex cases invoke video segmentation and adaptive frame sampling to recover event context and locate start and end times.</p>
+          <p><strong>Outcome</strong> On Qwen3.5-Gemini-Distilled, anomaly recall reached 92.7%, F1 87.3%, and temporal IoU 94.8%.</p></article>
+<article class="case-study"><h4>Dynamic semantic point clouds</h4>
+          <p>Make objects in dynamic traffic scenes individually queryable.</p>
+          <p><strong>Approach</strong> Fused 4D Gaussian Splatting with point clouds and SAM 3.1 masks to assign semantic classes and instance IDs to scene Gaussians.</p>
+          <p><strong>Outcome</strong> Produced a structured scene representation for downstream traffic-scene analysis.</p></article>
+<article class="case-study"><h4>Vision-language scene understanding</h4>
+          <p>Recognize fine-grained lighting, road and weather conditions.</p>
+          <p><strong>Approach</strong> Used X-CLIP visual and text features with multi-head MLP projections and contrastive alignment so scenes can be classified against detailed descriptions.</p>
+          <p><strong>Outcome</strong> Classification precision exceeded 90% across the target scene attributes.</p></article>
+<article class="case-study"><h4>Driving scene generation</h4>
+          <p>Generate controlled style variants of driving scenes.</p>
+          <p><strong>Approach</strong> Deployed the 2B Cosmos Transfer 2.5 world model, combining prompt conditioning with control signals to steer visual changes.</p>
+          <p><strong>Outcome</strong> Supported controlled scene style transfer.</p></article></div></article>
+<article class="experience-group"><header><div><h3>Qianli Intelligent Driving (Zeekr)</h3><p>Perception AI Algorithm Intern</p></div><span class="date">Jan – Feb 2026</span></header><div class="case-grid"><article class="case-study"><h4>Driving clip mining</h4>
+          <p>Find rare, high-dynamics segments in large autonomous-driving datasets.</p>
+          <p><strong>Approach</strong> Implemented a multithreaded pipeline that detects deviations across correlated signals, then classifies candidate events from relative motion with nearby vehicles.</p>
+          <p><strong>Outcome</strong> Identifies hard braking, overtaking and merging, with clip slicing, keyframe extraction and automatic GIF previews.</p></article></div></article>
+<article class="experience-group"><header><div><h3>Shanghai Airport AI Lab</h3><p>Algorithm Intern</p></div><span class="date">Mar 2025 – Jan 2026</span></header><div class="case-grid"><article class="case-study"><h4>Crowd gathering alerts</h4>
+          <p>Detect crowd buildup at boarding gates from live video.</p>
+          <p><strong>Approach</strong> Designed an IIM-based density estimator with a dual trigger that combines heatmap clustering and regional counts. Contributed to migrating the pipeline to Huawei Ascend NPUs.</p>
+          <p><strong>Outcome</strong> The system runs at multiple boarding gates across both major Shanghai airports.</p></article>
+<article class="case-study"><h4>Single-camera multi-object tracking</h4>
+          <p>Preserve track identities under edge-computing constraints.</p>
+          <p><strong>Approach</strong> Compared DeepSORT, ByteTrack, TrackTrack and NvDCF. Used ONNX Runtime for edge inference and ran detector, feature extractor and association ablations to isolate gains.</p>
+          <p><strong>Outcome</strong> Reduced identity switches and achieved IDF1 above 80%.</p></article>
+<article class="case-study"><h4>Street façade analysis for Tongji Design Institute</h4>
+          <p>Quantify street-level visual attributes and produce recommendations grounded in design standards.</p>
+          <p><strong>Approach</strong> Combined Qwen-VL scene analysis with SAM2 and DeepLabV3+ segmentation. Pixel statistics and HSV clustering quantify green-view ratio and dominant building colors. LightRAG retrieves relevant rules through a graph index.</p>
+          <p><strong>Outcome</strong> Built the processing pipeline with vLLM, Docker and Celery + Redis for distributed asynchronous workloads.</p></article></div></article>
+</div>
+    </section>
+    <section id="research" class="section" aria-labelledby="research-title">
+      <h2 id="research-title">Research</h2>
+      <div class="experience-list"><article class="experience-group"><header><div><h3>Multimodal multi-agent inspection</h3><p>RESS · Co-first author · Feb – Mar 2025</p></div></header><article class="case-study"><h4>Vision and compliance reasoning</h4>
+          <p>Make tunnel defect inspection decisions traceable.</p>
+          <p><strong>Approach</strong> Built a dataset of 8,928 defect images. A visual agent describes defects and a logic agent checks them against inspection standards. Fine-tuned with Unsloth and 4-bit QLoRA.</p>
+          <p><strong>Outcome</strong> The model runs in real time on a consumer RTX 4050.</p></article></article>
+<article class="experience-group"><header><div><h3>Point-cloud reconstruction for infrastructure</h3><p>TUST · Co-first author · Published · Dec 2023 – Dec 2024</p></div></header><article class="case-study"><h4>Unsupervised reconstruction and CUDA acceleration</h4>
+          <p>Reconstruct tunnel structures from large point clouds with limited annotation.</p>
+          <p><strong>Approach</strong> Used adaptive particle swarm optimization to extract the tunnel axis and local geometry to segment components and defects. Built a CUDA pipeline for LoD5 reconstruction.</p>
+          <p><strong>Outcome</strong> Cut processing time for a 1 km tunnel from two hours to 40 minutes. Deployed on the Shanghai Metro maintenance platform for leak localization and quantification.</p></article></article>
+</div>
+    </section>
+    <section id="education" class="section history" aria-labelledby="education-title">
+      <h2 id="education-title">Education</h2>
+      <ul class="timeline"><li><div><strong>Shanghai University</strong><span>M.S., Management Science and Engineering</span><p>Research in computer vision, multimodal models, 3D reconstruction and point-cloud processing.</p></div><span class="date">Sep 2023 – Jun 2026</span></li>
+          <li><div><strong>University of Shanghai for Science and Technology</strong><span>Bachelor’s, Information Management and Information Systems</span><p>Ranked first in the major and earned a recommendation for graduate admission, a Shanghai Outstanding Graduation Project award, and outstanding graduate recognition.</p></div><span class="date">Sep 2019 – Jun 2023</span></li></ul>
+      <p class="prior">IELTS 7.0 · Basic German. National second prize in the National English Competition for College Students and Shanghai third prize in a collegiate mathematics competition.</p>
     </section>
 
     <section id="contact" class="section contact" aria-labelledby="contact-title">
