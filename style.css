@@ -59,6 +59,26 @@ h2 { font-size: clamp(1.75rem, 4.2vw, 2.9rem); letter-spacing: -.048em; line-hei
 .rollout img { border-radius: 10px; }
 figcaption { color: var(--muted); font-size: .81rem; line-height: 1.5; margin-top: .6rem; }
 .section-heading p { color: var(--muted); margin-top: .65rem; }
+.brand-line, .brand-set { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem .9rem; }
+.brand-line { justify-content: space-between; }
+.brand-set { gap: .45rem; }
+.organization-logo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 102px;
+  height: 44px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+.organization-logo img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.organization-logo.dark { background: #162a26; border-color: #162a26; }
+.organization-logo.aridge { width: 106px; }
+.organization-logo.xpeng { width: 55px; }
+.organization-logo.school { width: 66px; height: 66px; padding: 7px; }
+.organization-heading { display: flex; align-items: center; gap: .8rem; min-width: 0; }
 .project-index { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1rem; }
 .project-index a { border: 1px solid var(--line); border-radius: 7px; padding: .4rem .65rem; }
 .project-index a:hover { background: #e6eee6; }
@@ -83,6 +103,12 @@ figcaption { color: var(--muted); font-size: .81rem; line-height: 1.5; margin-to
 .experience-group header p { color: var(--muted); margin-top: .4rem; }
 .date { font-family: "IBM Plex Mono", monospace; color: var(--accent); font-size: .8rem; white-space: nowrap; align-self: start; }
 .case-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem 2rem; }
+.case-grid-single { grid-template-columns: minmax(0, 1fr); }
+.publication { display: grid; gap: .38rem; margin: 0 0 1.2rem; padding: .95rem 1.1rem; border-left: 3px solid #7eaa98; background: #eef3e9; border-radius: 0 10px 10px 0; }
+.publication-title { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+.publication-authors, .publication-meta { color: var(--muted); font-size: .89rem; line-height: 1.5; }
+.publication .links { margin-top: .42rem; }
+.publication .button { white-space: normal; overflow-wrap: anywhere; min-width: 0; text-align: center; }
 .case-study { border-top: 1px solid var(--line); padding-top: .85rem; min-width: 0; overflow-wrap: anywhere; }
 .standalone .case-study { border: 0; padding: 0; }
 .case-study h4 { font-size: 1.15rem; line-height: 1.25; }
@@ -92,6 +118,7 @@ figcaption { color: var(--muted); font-size: .81rem; line-height: 1.5; margin-to
 .timeline { list-style: none; padding: 0; margin: 1.6rem 0 .8rem; }
 .timeline li { display: flex; justify-content: space-between; gap: 1rem; padding: .95rem 0; border-bottom: 1px solid var(--line); }
 .timeline li div { display: grid; gap: .35rem; }
+.timeline li .education-heading { grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: .8rem; }
 .timeline span, .prior, .contact p, .footer { color: var(--muted); }
 .timeline time { font-family: "IBM Plex Mono", monospace; color: var(--accent); font-size: .78rem; flex-shrink: 0; }
 .prior { line-height: 1.6; max-width: 42rem; }
@@ -111,6 +138,8 @@ figcaption { color: var(--muted); font-size: .81rem; line-height: 1.5; margin-to
   .portrait { padding: 4px; border-radius: 12px; box-shadow: 5px 5px 0 #e4ebe0; }
   .portrait img { border-radius: 8px; }
   .case-grid { grid-template-columns: 1fr; }
+  .organization-heading { gap: .6rem; }
+  .organization-heading .organization-logo { width: 84px; height: 40px; }
   .pipeline ol { grid-template-columns: 1fr; gap: .95rem; }
   .pipeline li:not(:last-child)::after { content: "↓"; top: auto; bottom: -1rem; inset-inline-end: auto; left: .8rem; }
   .section { padding: 2rem 0; }

@@ -51,7 +51,7 @@
 
 
     <section id="work" class="section" aria-labelledby="work-title">
-      <div class="section-heading"><h2 id="work-title">小鹏汇天</h2><p>感知算法工程师 · 2026.07 至今</p></div>
+      <div class="section-heading"><div class="brand-line"><h2 id="work-title">小鹏汇天</h2><div class="brand-set"><span class="organization-logo dark aridge"><img src="../assets/logos/aridge.png" alt="小鹏汇天 ARIDGE" width="120" height="48" loading="lazy"></span><span class="organization-logo dark xpeng"><img src="../assets/logos/xpeng.png" alt="小鹏汽车 XPENG" width="120" height="48" loading="lazy"></span></div></div><p>感知算法工程师 · 2026.07 至今</p></div>
       <nav class="project-index" aria-label="项目索引"><a href="#xfly">X-Fly</a><a href="#bev">实时 3D BEV</a><a href="#landing">降落标志</a><a href="#internships">实习经历</a><a href="#research">科研经历</a><a href="#education">教育经历</a></nav>
       <article id="xfly" class="featured">
         <div class="featured-content">
@@ -87,7 +87,7 @@
           <li><strong>三维轨迹与飞控</strong><span>高度剖面、平滑与跟踪</span></li></ol></figure><p>搭建 A* 专家航线、仿真渲染采图、VLM 反推指令的数据管线。执行时由 VLM 定位指代地标，解析终点、避让和限制区域、路径偏好、速度及高度带，并与语义地图中的区域匹配。</p>
           <p>以 26 类语义分割和米制绝对深度联合监督，对 Qwen3.5 视觉骨干做 LoRA 微调，合并权重后供 VLM 与 BEV 共享。巡航数据上，深度准确率（δ &lt; 1.25）从 71.99% 升至 88.61%，AbsRel 从 0.1739 降至 0.1137，分割 mIoU 从 28.61% 升至 30.81%。冻结增强骨干重训预测头，深度准确率仍达 88.68%。</p>
           <p>结合前视、下视多帧图像与飞控位姿，在多个高度上做几何投影，以 1 Hz 更新世界坐标下的 5 m 网格，记录可见性、语义概率、地面高程和障碍顶高。训练时利用数字表面模型（DSM）与语义网格做光线求交，为可见格在线生成监督。</p>
-          <p>将高于飞行高度的障碍及避让或限飞区设为硬约束，把沿路等偏好设为软代价。用 A* 在包含高度约束的代价场上搜索代价最小的水平路径，配合高度剖面、圆弧平滑和限加加速度的 S 曲线生成三维飞控跟踪轨迹。UE + FCU 仿真闭环任务成功率达 72%。</p></div>
+          <p>将高于飞行高度的障碍及避让或限飞区设为硬约束，把沿路等偏好设为软代价。用 A* 在包含高度约束的代价场上搜索代价最小的水平路径，配合高度剖面、圆弧平滑和限加加速度的 S 曲线生成三维飞控跟踪轨迹。UE + FCU 仿真闭环任务成功率达 72%。</p><p>飞控跟踪以 S 曲线限制加速度与加加速度，并通过高度剖面把平面路径转换为三维轨迹。遇到航线受阻、偏航或地图观测更新时触发重规划。</p></div>
       </article>
       <div id="landing" class="experience-group standalone"><article class="case-study"><h3>降落标志检测与量化部署</h3><p>强化检测模型在难例中的鲁棒性，并为目标硬件选择兼容量化方案。</p>
           <p><strong>方法</strong> 补充特定场景样本，缓解对圆形轮廓的过拟合。按目标尺寸和到图像中心的距离分桶评估三档量化感知训练（QAT）方案。</p>
@@ -96,56 +96,75 @@
 
     <section id="experience" class="section history" aria-labelledby="experience-title">
       <h2 id="experience-title">实习经历</h2>
-      <div id="internships" class="experience-list"><article class="experience-group"><header><div><h3>51WORLD</h3><p>算法实习生 · SimOne 4.x / 世界模型</p></div><span class="date">2026.02 – 2026.05</span></header><div class="case-grid"><article class="case-study"><h4>长视频异常检测</h4>
+      <div id="internships" class="experience-list"><article class="experience-group"><header><div class="organization-heading"><span class="organization-logo "><img src="../assets/logos/51world.png" alt="51WORLD" width="120" height="48" loading="lazy"></span><div><h3>51WORLD</h3><p>算法实习生 · SimOne 4.x / 世界模型</p></div></div><span class="date">2026.02 – 2026.05</span></header><div class="case-grid"><article class="case-study"><h4>长视频异常检测</h4>
           <p>在单目驾驶视频中检测长尾异常事件并定位起止时间。</p>
           <p><strong>方法</strong> 基于 LangGraph 实现多智能体分层路由。复杂事件触发视频切分和动态抽帧工具，补足长时上下文后定位时间范围。</p>
-          <p><strong>结果</strong> 在 Qwen3.5-Gemini-Distilled 上，异常事件 Recall 为 92.7%、F1 为 87.3%、时间区间 IoU 为 94.8%。</p></article>
+          <p><strong>结果</strong> 在 Qwen3.5-Gemini-Distilled 上，异常事件 Recall 为 92.7%、F1 为 87.3%、时间区间 IoU 为 94.8%。</p>
+          <p>简单片段走较短的分析路径，复杂或长持续时间事件触发切片与按需抽帧。把事件类别判断和起止时间定位衔接起来，使长视频案例能定位到具体片段。</p></article>
 <article class="case-study"><h4>动态语义点云与实例分割</h4>
           <p>为动态交通场景中的对象建立可查询的结构化表示。</p>
           <p><strong>方法</strong> 融合 4D Gaussian Splatting、点云和 SAM 3.1 分割结果，为场景中的高斯体赋予语义类别与实例 ID。</p>
-          <p><strong>结果</strong> 生成可用于下游交通场景分析的语义化场景表示。</p></article>
+          <p><strong>结果</strong> 生成可用于下游交通场景分析的语义化场景表示。</p>
+          <p>输出同时保留类别与实例身份，可在动态场景中区分同类别的不同车辆或对象，并以结构化标签供场景分析使用。</p></article>
 <article class="case-study"><h4>多模态对比学习与场景理解</h4>
           <p>识别光照、道路和天气等细粒度场景属性。</p>
           <p><strong>方法</strong> 以 X-CLIP 图文特征为基础，用多头 MLP 做对比学习，将图像与细粒度描述对齐。</p>
-          <p><strong>结果</strong> 光照环境、道路类型及天气分类精确率超过 90%。</p></article>
+          <p><strong>结果</strong> 光照环境、道路类型及天气分类精确率超过 90%。</p>
+          <p>多头投影在共享的图文特征空间中保留不同维度的判别信息，使道路结构、光照和天气等属性能够分别对齐到文本描述。</p></article>
 <article class="case-study"><h4>自动驾驶场景生成</h4>
           <p>生成可控的自动驾驶场景风格变体。</p>
           <p><strong>方法</strong> 部署 Cosmos Transfer 2.5（2B）世界模型，联合提示词和控制信号引导画面转换。</p>
-          <p><strong>结果</strong> 实现可控的驾驶场景风格转换。</p></article></div></article>
-<article class="experience-group"><header><div><h3>千里智驾（极氪）</h3><p>感知 AI 算法实习生</p></div><span class="date">2026.01 – 2026.02</span></header><div class="case-grid"><article class="case-study"><h4>自动驾驶数据挖掘</h4>
+          <p><strong>结果</strong> 实现可控的驾驶场景风格转换。</p>
+          <p>提示词负责指定目标视觉风格，控制信号约束场景结构，使风格转换可以服务于不同的仿真驾驶条件。</p></article></div></article>
+<article class="experience-group"><header><div class="organization-heading"><span class="organization-logo "><img src="../assets/logos/zeekr.png" alt="极氪 Zeekr" width="120" height="48" loading="lazy"></span><div><h3>千里智驾（极氪）</h3><p>感知 AI 算法实习生</p></div></div><span class="date">2026.01 – 2026.02</span></header><div class="case-grid case-grid-single"><article class="case-study"><h4>自动驾驶数据挖掘</h4>
           <p>从海量自动驾驶 Clip 中检出高动态长尾片段。</p>
-          <p><strong>方法</strong> 构建多线程规则挖掘工具链，用多指标关联筛出偏离分布的片段，再依据自车和周围车辆的相对运动细分事件。</p>
-          <p><strong>结果</strong> 支持急刹、超车和汇入分类，并自动执行切片、关键帧提取和 GIF 可视化。</p></article></div></article>
-<article class="experience-group"><header><div><h3>上海机场人工智能实验室</h3><p>算法实习生</p></div><span class="date">2025.03 – 2026.01</span></header><div class="case-grid"><article class="case-study"><h4>机场人群聚集告警</h4>
+          <p><strong>方法</strong> 构建多线程规则挖掘工具链。第一阶段通过多维指标关联定位异常片段，第二阶段依据自车与周围车辆的相对运动规则对候选事件分类。</p>
+          <p><strong>结果</strong> 支持急刹、超车和汇入分类，并自动生成带关键帧和 GIF 预览的片段，供后续筛选与复核。</p></article></div></article>
+<article class="experience-group"><header><div class="organization-heading"><span class="organization-logo "><img src="../assets/logos/shanghai-airport.png" alt="上海机场 AVINEX" width="120" height="48" loading="lazy"></span><div><h3>上海机场人工智能实验室</h3><p>算法实习生</p></div></div><span class="date">2025.03 – 2026.01</span></header><div class="case-grid"><article class="case-study"><h4>机场人群聚集告警</h4>
           <p>从实时视频中识别登机口人员聚集。</p>
           <p><strong>方法</strong> 设计 IIM 人群密度估计方案，通过热力图聚集与区域计数双重触发告警，并参与昇腾 NPU 迁移。</p>
-          <p><strong>结果</strong> 方案运行于上海两大机场多个登机口。</p></article>
+          <p><strong>结果</strong> 方案运行于上海两大机场多个登机口。</p>
+          <p>热力图用来定位局部聚集，区域计数提供独立的告警条件。告警链路对接登机口实时摄像头，并在昇腾环境中适配推理。</p></article>
 <article class="case-study"><h4>同镜多目标追踪</h4>
           <p>在边缘设备算力限制下保持目标身份连续性。</p>
           <p><strong>方法</strong> 对比 DeepSORT、ByteTrack、TrackTrack 和 NvDCF，以 ONNX Runtime 优化边缘推理，并消融检测器、特征提取器与关联策略。</p>
-          <p><strong>结果</strong> 减少 ID 切换，IDF1 超过 80%。</p></article>
+          <p><strong>结果</strong> 减少 ID 切换，IDF1 超过 80%。</p>
+          <p>通过组合消融分别衡量检测器、外观特征和关联策略的影响，在边缘设备预算下优先改进对身份连续性贡献最大的环节。</p></article>
 <article class="case-study"><h4>同济设计院街景立面分析</h4>
           <p>量化街景视觉指标，并根据行业规范生成改造建议。</p>
           <p><strong>方法</strong> 结合 Qwen-VL 场景理解与 SAM2、DeepLabV3+ 像素分割，用像素统计和 HSV 聚类量化绿视率与建筑主色调。LightRAG 通过图索引检索相关规范。</p>
-          <p><strong>结果</strong> 使用 vLLM、Docker 和 Celery + Redis 搭建分布式异步处理流程。</p></article></div></article>
+          <p><strong>结果</strong> 使用 vLLM、Docker 和 Celery + Redis 搭建分布式异步处理流程。</p>
+          <p>将像素测量和规范检索拆开，使改造建议能够同时关联绿视率、建筑主色调等量化结果与适用规范条款。</p></article></div></article>
 </div>
     </section>
     <section id="research" class="section" aria-labelledby="research-title">
       <h2 id="research-title">科研经历</h2>
-      <div class="experience-list"><article class="experience-group"><header><div><h3>多智能体协同多模态巡检</h3><p>RESS · 共同第一作者 · 2025.02 – 2025.03</p></div></header><article class="case-study"><h4>视觉感知与规范推理</h4>
+      <div class="experience-list"><article class="experience-group"><header><div><h3>多智能体协同多模态巡检</h3><p>RESS · SCI 中科院一区 · 共同第一作者 · 2025.02 – 2025.03</p></div></header><div class="publication">
+            <p class="publication-title">Lightweight multimodal LLM-empowered dual-agent collaboration for reliable defect detection and maintenance recommendation in tunnel infrastructure</p>
+            <p class="publication-authors">Gang Yu, <strong>Ruibin Ju</strong>, Vijayan Sugumaran, Haizhu Liu</p>
+            <p class="publication-meta">Reliability Engineering &amp; System Safety · 2026 · 268, 111973 · <strong>IF 12.98</strong></p>
+            <div class="links"><a class="button primary" href="https://doi.org/10.1016/j.ress.2025.111973">DOI 10.1016/j.ress.2025.111973</a><a class="button" href="https://www.sciencedirect.com/science/article/pii/S0951832025011731">出版社页面 <span aria-hidden="true">↗</span></a></div>
+          </div><article class="case-study"><h4>视觉感知与规范推理</h4>
           <p>让隧道病害巡检结论可追溯。</p>
           <p><strong>方法</strong> 构建包含 8,928 张图像的数据集，分别用视觉智能体描述病害、逻辑智能体执行规范推理。通过 Unsloth 和 4-bit QLoRA 完成微调。</p>
-          <p><strong>结果</strong> 模型可在消费级 RTX 4050 上实时推理。</p></article></article>
-<article class="experience-group"><header><div><h3>基础设施点云逆向重建</h3><p>TUST · 共同第一作者 · 已见刊 · 2023.12 – 2024.12</p></div></header><article class="case-study"><h4>无监督重建与 CUDA 加速</h4>
+          <p><strong>结果</strong> 模型可在消费级 RTX 4050 上实时推理。</p>
+          <p>视觉智能体采用微调后的 Qwen2.5-VL-7B。维护智能体用 LightRAG 建立条款级知识图谱，通过向量与图混合检索，将病害描述关联到适用规范。论文报告 ROUGE-1 为 0.8342，ROUGE-2 为 0.7389，BLEU 为 0.68，语义相似度为 0.9830。</p></article></article>
+<article class="experience-group"><header><div><h3>基础设施点云逆向重建</h3><p>TUST · SCI 中科院一区 · 共同第一作者 · 已见刊 · 2023.12 – 2024.12</p></div></header><div class="publication">
+            <p class="publication-title">Generating a defect-enriched geometric digital twin for tunnel operation and maintenance using a bottom-up unsupervised approach</p>
+            <p class="publication-authors">Gang Yu, <strong>Ruibin Ju</strong>, Junjie Chen, Vijayan Sugumaran, Jing Xiong</p>
+            <p class="publication-meta">Tunnelling and Underground Space Technology · 2026 · 176, 107907 · <strong>IF 7.4</strong></p>
+            <div class="links"><a class="button primary" href="https://doi.org/10.1016/j.tust.2026.107907">DOI 10.1016/j.tust.2026.107907</a><a class="button" href="https://www.sciencedirect.com/science/article/pii/S0886779826004657">出版社页面 <span aria-hidden="true">↗</span></a></div>
+          </div><article class="case-study"><h4>无监督重建与 CUDA 加速</h4>
           <p>在标注资源有限时从大规模点云逆向重建隧道结构。</p>
           <p><strong>方法</strong> 用自适应粒子群优化（PSO）提取隧道轴线，以局部几何特征分割构件和病害，构建 CUDA 加速的 LoD5 重建管线。</p>
-          <p><strong>结果</strong> 将 1 km 隧道点云处理从 2 小时缩短至 40 分钟，成果部署于上海地铁运维平台，支持渗漏定位与量化。</p></article></article>
+          <p><strong>结果</strong> 将 1 km 隧道点云处理从 2 小时缩短至 40 分钟，成果部署于上海地铁运维平台，支持渗漏定位与量化。</p>
+          <p>重建以管片环为基本单元自底向上装配，同时保留衬砌、电缆、管线、轨枕和渗漏信息。论文报告第 III 层级总体准确率 0.811、mIoU 0.624，第 IV 层级 mAP@50 为 0.582。</p></article></article>
 </div>
     </section>
     <section id="education" class="section history" aria-labelledby="education-title">
       <h2 id="education-title">教育经历</h2>
-      <ul class="timeline"><li><div><strong>上海大学</strong><span>管理科学与工程 · 硕士</span><p>研究方向包括计算机视觉、多模态大模型、三维重建与点云处理。</p></div><span class="date">2023.09 – 2026.06</span></li>
-          <li><div><strong>上海理工大学</strong><span>信息管理与信息系统 · 本科</span><p>专业综合排名第一，获保研资格、上海市优秀毕业设计和优秀毕业生荣誉。</p></div><span class="date">2019.09 – 2023.06</span></li></ul>
+      <ul class="timeline"><li><div class="education-heading"><span class="organization-logo school"><img src="../assets/logos/shanghai-university.png" alt="上海大学" width="120" height="48" loading="lazy"></span><div><strong>上海大学</strong><span>管理科学与工程 · 硕士</span><p>研究方向包括计算机视觉、多模态大模型、三维重建与点云处理。</p></div></div><span class="date">2023.09 – 2026.06</span></li>
+          <li><div class="education-heading"><span class="organization-logo school"><img src="../assets/logos/usst.png" alt="上海理工大学" width="120" height="48" loading="lazy"></span><div><strong>上海理工大学</strong><span>信息管理与信息系统 · 本科</span><p>专业综合排名第一，获保研资格、上海市优秀毕业设计和优秀毕业生荣誉。</p></div></div><span class="date">2019.09 – 2023.06</span></li></ul>
       <p class="prior">雅思 7.0 · 基础德语。全国大学生英语竞赛国家级二等奖、大学生数学竞赛上海市三等奖。</p>
     </section>
 
